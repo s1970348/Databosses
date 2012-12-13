@@ -4,9 +4,3 @@
 <meta name="revised" content="Jesse Veentjer, 13/12/2012" />
 <meta http-equiv="refresh" content="5" />
 
-<?php
-/**
- * @author Jesse Veentjer
- * @copyright 2012
- */
-?>
