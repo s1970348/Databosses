@@ -1,7 +1,6 @@
 <?
 session_start();
-// this sets variables in the session 
-//Setting GMT+1
+// log session start time. 
 $_SESSION['login_time']=$_SERVER["REQUEST_TIME"]+(60*60); 
 ?>
 
@@ -30,13 +29,14 @@ $_SESSION['user'] = $username;
 $_SESSION['pass'] = $password;
 ob_end_clean();
 */
+// If login data was correct then redirect to previous page else give an error
 if($email=$_POST['e-mail'] AND
 $password=$_POST['password'] ){
 echo "You have been successfully logged in! Please wait and you will be redirected!";
 echo "<BR />";
 echo "<font size='-1'>(<a href='".$_POST['referer']."'>Or click here if you don't want to wait!</a>)</font>";
-echo "<meta http-equiv=\"refresh\" content=\"3;suc6.php\">";
-//store entered email and password in session
+echo "<meta http-equiv=\"refresh\" content=\"3;account_management.php\">";
+//store entered (correct) )email and password in session
 $_SESSION['e-mail']=$email;
 $_SESSION['password']=$password;
 
@@ -45,6 +45,7 @@ exit();
 die("Username or password was incorrect! Please try again!" . mysql_error());
 }
 }else{ 
+// if no currentsession data can be found then print form to query user for data
     echo("
 <form method = 'post' action=". $_SERVER['PHP_SELF'] .">
 <fieldset>
