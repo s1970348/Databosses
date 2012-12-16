@@ -15,7 +15,6 @@ require_once ( 'meta.php ' );
 <body>
 <?PHP
 
-//temporary
 if (isset($_POST['submit'])) {
 require_once('db-connect.php');
 $query= ('"SELECT Email,password from User where Email is '.$_POST["e-mail"].'"');
