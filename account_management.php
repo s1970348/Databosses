@@ -67,18 +67,12 @@ Id like to view my library
 <?
 require_once('db-connect.php');
 //query for users library
-$query= ('select ISBN,Title,Author,Year,Pages,Weight,Binding,Format,Location,LocationURL,Rating from Document
-where ISBN IS NOT NULL
-and Title IS NOT NULL
-and Author IS NOT NULL
-and Year IS NOT NULL
-and Pages IS NOT NULL
-and Weight IS NOT NULL
-and Binding IS NOT NULL
-and Format IS NOT NULL
-and Location IS NOT NULL
-and LocationURL IS NOT NULL
-and Rating IS NOT NULL');
+$query= ("'SELECT *
+FROM Catalog
+NATURAL JOIN Document
+WHERE Email = '".$_SESSION['e-mail']."'
+AND Password = '".$_SESSION['password']."'
+AND Type = 'paper'");
 $result = mysql_query($query) or die('library query failed:'.mysql_error());
 
 $row = mysql_fetch_array($query) or die('mysql_fetch_array failed:'.mysql_error());
@@ -117,18 +111,12 @@ echo('You do not have an e-library yet <br />');
 <?
 require_once('db-connect.php');
 //query for users library
-$query= ('select ISBN,Title,Author,Year,Pages,Weight,Binding,Format,Location,LocationURL,Rating from Document
-where ISBN IS NOT NULL
-and Title IS NOT NULL
-and Author IS NOT NULL
-and Year IS NOT NULL
-and Pages IS NOT NULL
-and Weight IS NOT NULL
-and Binding IS NOT NULL
-and Format IS NOT NULL
-and Location IS NOT NULL
-and LocationURL IS NOT NULL
-and Rating IS NOT NULL');
+$query= ("'SELECT *
+FROM Catalog
+NATURAL JOIN Document
+WHERE Email = '".$_SESSION['e-mail']."'
+AND Password = '".$_SESSION['password']."'
+AND Type = 'electronic'");
 $result = mysql_query($query) or die('library query failed:'.mysql_error());
 
 $row = mysql_fetch_array($query) or die('mysql_fetch_array failed:'.mysql_error());
