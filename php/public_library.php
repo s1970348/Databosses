@@ -29,7 +29,35 @@ $_SESSION['login_time']=$_SERVER["REQUEST_TIME"]+(60*60);
       </table>
       <div class="textwrapper">
         <div class="text">
-          The public library will be displayed here.
+          <?php include("db-connect.php"); ?>
+					
+					<?
+					$sql = "select distinct ISBN, Title, Author, Year, Pages, Weight, Binding, Format, Location, LocationURL, Rating, Type from Document inner join Ownership on ID=Book_ID inner join User on Owner_ID=U_ID where Visibility='yes'";
+$result = mysql_query($sql)or die(mysql_error()); 
+
+echo "<table id='results'>";
+while($row = mysql_fetch_array($result)){ 
+$ISBN     = $row['ISBN'];
+	$Title    = $row['Title'];  	
+  $Author = $row['Author'];	
+	$Year = $row['Year'];
+	$Pages = $row['Pages'];
+	$Weight = $row['Weight'];
+	$Binding = $row['Binding'];
+	$Format = $row['Format'];
+	$Location = $row['Location'];
+	$LocationURL = $row['LocationURL'];
+	$Rating = $row['Rating'];
+	$Type = $row['Type'];
+						
+					echo "<tr><td><b>ISBN:</b> $ISBN</td></tr><tr><td><b>Title:</b> $Title</td></tr><tr><td><b>Author:</b> $Author</td></tr><tr><td><b>Year:</b> $Year</td></tr><tr><td><b>Pages:</b> $Pages</td></tr><tr><td><b>Weight:</b> $Weight</td></tr><tr><td><b>Binding:</b> $Binding</td></tr><tr><td><b>Format:</b> $Format</td></tr><tr><td><b>Location:</b> $Location</td></tr><tr><td><a href=".$LocationURL.">Link to location</a></td></tr><tr><td><b>Rating:</b> $Rating</td></tr><tr><td><b>Type:</b> $Type</td></tr>";
+					
+								 }								 
+echo "</table>";	
+					
+					?>
+					
+					
         </div>
         <div class="login">
           <?php include("login.php"); ?>
