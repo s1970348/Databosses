@@ -147,6 +147,12 @@ if (($_FILES["file"]["type"] == "application/msword")
 || ($_FILES["file"]["type"] == "text/plain")
 && ($_FILES["file"]["size"] < 52428800)) {
 
+if (preg_match('~"<>{}"~iU', $_FILES["file"]["name"]))
+	{
+		echo "Het bestand bevat illegale tekens. Ga <a href=\"abstractsuploaden.php\">terug</a> naar de uploadpagina.";
+
+} else {
+
 if (file_exists("siegfried.let.rug.nl/s1815911/uploads/" . $_FILES["file"]["name"]))
       {
       echo $_FILES["file"]["name"] . " already exists, please change the name of the file. ";
@@ -162,6 +168,7 @@ if (file_exists("siegfried.let.rug.nl/s1815911/uploads/" . $_FILES["file"]["name
 
   echo "Invalid file!";
   
+	}
  }
 
 $queryElectronicFile=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", '', '', ".$Format.", '', siegfried.let.rug.nl/s1815911/uploads/".$_FILES["file"]["name"].", ".$Rating.", electronic)";
