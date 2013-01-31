@@ -115,7 +115,10 @@ $Weight = $_POST['Weight'];
 $Binding = $_POST['Binding'];
 $Location = $_POST['Location'];
 
-$queryPaper=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", ".$Weight.", ".$Binding.",'', ".$Location.", '', ".$Rating.", paper");
+$queryPaper=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", ".$Weight.", ".$Binding.",'', ".$Location.", '', ".$Rating.", paper)";
+
+$queryexecutePaper= mysql_query($queryPaper) or die('Adding the book to the database failed.' . mysql_error());
+
 } else {
 
 $Format = $_POST['Format'];
@@ -124,7 +127,9 @@ if(isset($_POST['LocationURL'])) {
 
 $LocationURL = $_POST['LocationURL'];
 
-$queryElectronicOnline=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", '', '', ".$Format.", '', ".$LocationURL.", ".$Rating.", electronic);
+$queryElectronicOnline=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", '', '', ".$Format.", '', ".$LocationURL.", ".$Rating.", electronic)";
+
+$queryexecuteElectronicOnline= mysql_query($queryElectronicOnline) or die('Adding the book to the database failed.' . mysql_error());
 
 } else {
 
@@ -140,7 +145,9 @@ if (file_exists("siegfried.let.rug.nl/s1815911/uploads/" . $_FILES["file"]["name
       echo "Uw bestand is succesvol geüpload.";
       }
 
-$queryElectronicFile=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", '', '', ".$Format.", '', siegfried.let.rug.nl/s1815911/uploads/".$_FILES["file"]["name"].", ".$Rating.", electronic);
+$queryElectronicFile=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", '', '', ".$Format.", '', siegfried.let.rug.nl/s1815911/uploads/".$_FILES["file"]["name"].", ".$Rating.", electronic)";
+
+$queryexecuteElectronicFile= mysql_query($queryElectronicFile) or die('Adding the book to the database failed.' . mysql_error());
 
 
 ?>
