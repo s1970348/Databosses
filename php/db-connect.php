@@ -1,23 +1,12 @@
-<?php
-$host='localhost';
-$user='root';
-$password='';
-$databasename='s1970348';
+<?	  
+$dbhost = 'localhost';
+$username="s1982419";
+$password="Zu0ahH2e";
+$database="s1982419";
 
-$con = mysql_connect($host, $user, $password);
-if (!$con)
-{
-				die('Initial connection to database failed: ' . mysql_error());
-}
-
-$db_selected = mysql_select_db($databasename, $con);
-if (!$db_selected)
-{
-				die('Connection to the database succeeded, however couldnt find:'.$databasename .' error returned: ' . mysql_error());
-}
-
-/**
- * @author Jesse Veentjer
- * @copyright 2012
- */
+$link = mysql_connect($dbhost,$username,$password);
+if (!$link) {
+    die('Could not connect: ' . mysql_error());
+		}
+mysql_select_db($database) or die( "Unable to select database");
 ?>
