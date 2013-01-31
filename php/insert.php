@@ -6,6 +6,11 @@ $lastname=$_POST['Lname'];
 $visibility=$_POST['Visibility'];
 $email=$_POST['Email'];
 $password=$_POST['Password'];
+$passwordcheck=$_POST['Passwordcheck'];
+
+if ($password != $passwordcheck) {
+	 						die("<p id='error'>Passwords do not match.</p>");
+                         }
 
 $query = "INSERT INTO User VALUES ('','$firstname','$lastname','$email','$visibility','$password')";
 if (!mysql_query($query))

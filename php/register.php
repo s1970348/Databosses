@@ -46,7 +46,8 @@ $_SESSION['login_time']=$_SERVER["REQUEST_TIME"]+(60*60);
             Choose a password:<br>
             <input type='password' name="Password"><br>
             <br>
-            
+						Type password again:<br>
+            <input type='password' name="Passwordcheck"><br>
             <br>
             <input type="Submit" value="Register now!">
           </form>
