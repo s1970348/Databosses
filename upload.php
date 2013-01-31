@@ -135,14 +135,14 @@ $queryexecuteElectronicOnline= mysql_query($queryElectronicOnline) or die('Addin
 
 if (file_exists("siegfried.let.rug.nl/s1815911/uploads/" . $_FILES["file"]["name"]))
       {
-      echo $_FILES["file"]["name"] . " bestaat al, verzin een andere naam. ";
+      echo $_FILES["file"]["name"] . " already exists, please change the name of the file. ";
 			echo (input type='hidden' value='1');
       }
     else
       {
       move_uploaded_file($_FILES["file"]["tmp_name"],
       "../uploads/" . $_FILES["file"]["name"]);
-      echo "Uw bestand is succesvol geüpload.";
+      echo "The book has been succesfully added.";
       }
 
 $queryElectronicFile=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", '', '', ".$Format.", '', siegfried.let.rug.nl/s1815911/uploads/".$_FILES["file"]["name"].", ".$Rating.", electronic)";
