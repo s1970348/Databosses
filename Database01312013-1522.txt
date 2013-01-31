@@ -1,0 +1,190 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.8.1deb5+lenny9
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generatie Tijd: 31 Jan 2013 om 15:21
+-- Server versie: 5.0.51
+-- PHP Versie: 5.2.6-1+lenny16
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `s1982419`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabel structuur voor tabel `Catalog`
+--
+
+CREATE TABLE IF NOT EXISTS `Catalog` (
+  `U_ID` int(3) NOT NULL default '0',
+  `Email` varchar(40) NOT NULL default '',
+  `Password` varchar(20) NOT NULL default '',
+  `ID` int(3) NOT NULL default '0',
+  PRIMARY KEY  (`U_ID`,`ID`,`Email`,`Password`),
+  KEY `U_ID` (`U_ID`,`Email`,`Password`),
+  KEY `ID` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `Catalog`
+--
+
+INSERT INTO `Catalog` (`U_ID`, `Email`, `Password`, `ID`) VALUES
+(1, 'donald@example.com', 'ilovedaisy', 1),
+(2, 'deneiro@example.com', 'battleship', 1),
+(1, 'donald@example.com', 'ilovedaisy', 2),
+(2, 'deneiro@example.com', 'battleship', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Tabel structuur voor tabel `Document`
+--
+
+CREATE TABLE IF NOT EXISTS `Document` (
+  `ID` int(3) NOT NULL auto_increment,
+  `ISBN` varchar(20) NOT NULL default '',
+  `Title` varchar(50) default NULL,
+  `Author` varchar(50) default NULL,
+  `Year` int(4) default NULL,
+  `Pages` int(4) default NULL,
+  `Weight` float(5,1) default NULL,
+  `Binding` varchar(10) default NULL,
+  `Format` varchar(10) default NULL,
+  `Location` varchar(30) default NULL,
+  `LocationURL` varchar(50) default NULL,
+  `Rating` int(2) default NULL,
+  `Type` varchar(10) default NULL,
+  PRIMARY KEY  (`ID`),
+  UNIQUE KEY `ISBN` (`ISBN`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `Document`
+--
+
+INSERT INTO `Document` (`ID`, `ISBN`, `Title`, `Author`, `Year`, `Pages`, `Weight`, `Binding`, `Format`, `Location`, `LocationURL`, `Rating`, `Type`) VALUES
+(1, '0224097288', 'Back to Blood', 'Tom Wolfe', 2012, 560, 844.0, 'hard', '', 'bookshelf', '', 0, 'paper'),
+(2, '0751549223', 'Christmas at the Cupcake Café', 'Jenny Colgan', 2012, 440, 538.0, 'hard', '', 'kitchen', '', 0, 'paper'),
+(3, '1405156392', 'Semantics', 'John I. Saeed', 2008, 480, 0.0, '', '.pdf', '', 'http://books.google.nl/books?id=Wq_uJzzhJYwC&print', 0, 'electronic');
+
+-- --------------------------------------------------------
+
+--
+-- Tabel structuur voor tabel `Friends`
+--
+
+CREATE TABLE IF NOT EXISTS `Friends` (
+  `inviter` int(3) NOT NULL default '0',
+  `invited` int(3) NOT NULL default '0',
+  `accepted` int(1) default NULL,
+  PRIMARY KEY  (`inviter`,`invited`),
+  KEY `invited` (`invited`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `Friends`
+--
+
+INSERT INTO `Friends` (`inviter`, `invited`, `accepted`) VALUES
+(1, 2, 1),
+(1, 3, 1),
+(3, 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tabel structuur voor tabel `Ownership`
+--
+
+CREATE TABLE IF NOT EXISTS `Ownership` (
+  `Owner_ID` int(3) NOT NULL default '0',
+  `Book_ID` int(3) NOT NULL default '0',
+  PRIMARY KEY  (`Owner_ID`,`Book_ID`),
+  KEY `Book_ID` (`Book_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `Ownership`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Tabel structuur voor tabel `User`
+--
+
+CREATE TABLE IF NOT EXISTS `User` (
+  `U_ID` int(3) NOT NULL auto_increment,
+  `Fname` varchar(20) default NULL,
+  `Lname` varchar(20) default NULL,
+  `Email` varchar(40) NOT NULL,
+  `Visibility` varchar(3) default NULL,
+  `Password` varchar(20) NOT NULL,
+  PRIMARY KEY  (`U_ID`,`Email`,`Password`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `User`
+--
+
+INSERT INTO `User` (`U_ID`, `Fname`, `Lname`, `Email`, `Visibility`, `Password`) VALUES
+(1, 'Donald', 'Duck', 'donald@example.com', 'yes', 'ilovedaisy'),
+(2, 'Robert', 'de Neiro', 'deneiro@example.com', 'yes', 'battleship'),
+(3, 'Nicky', 'Romero', 'romero@example.com', 'no', 'stardom'),
+(6, 'Peter', 'Zwama', 'p_zwama@hotmail.com', 'yes', 'helloworld');
+
+-- --------------------------------------------------------
+
+--
+-- Tabel structuur voor tabel `Wishlist`
+--
+
+CREATE TABLE IF NOT EXISTS `Wishlist` (
+  `U_ID` int(3) NOT NULL default '0',
+  `ID` int(3) NOT NULL default '0',
+  PRIMARY KEY  (`U_ID`,`ID`),
+  KEY `ID` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `Wishlist`
+--
+
+
+--
+-- Beperkingen voor gedumpte tabellen
+--
+
+--
+-- Beperkingen voor tabel `Catalog`
+--
+ALTER TABLE `Catalog`
+  ADD CONSTRAINT `Catalog_ibfk_1` FOREIGN KEY (`U_ID`, `Email`, `Password`) REFERENCES `User` (`U_ID`, `Email`, `Password`),
+  ADD CONSTRAINT `Catalog_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `Document` (`ID`);
+
+--
+-- Beperkingen voor tabel `Friends`
+--
+ALTER TABLE `Friends`
+  ADD CONSTRAINT `Friends_ibfk_1` FOREIGN KEY (`inviter`) REFERENCES `User` (`U_ID`),
+  ADD CONSTRAINT `Friends_ibfk_2` FOREIGN KEY (`invited`) REFERENCES `User` (`U_ID`);
+
+--
+-- Beperkingen voor tabel `Ownership`
+--
+ALTER TABLE `Ownership`
+  ADD CONSTRAINT `Ownership_ibfk_1` FOREIGN KEY (`Owner_ID`) REFERENCES `User` (`U_ID`),
+  ADD CONSTRAINT `Ownership_ibfk_2` FOREIGN KEY (`Book_ID`) REFERENCES `Document` (`ID`);
+
+--
+-- Beperkingen voor tabel `Wishlist`
+--
+ALTER TABLE `Wishlist`
+  ADD CONSTRAINT `Wishlist_ibfk_1` FOREIGN KEY (`U_ID`) REFERENCES `User` (`U_ID`),
+  ADD CONSTRAINT `Wishlist_ibfk_2` FOREIGN KEY (`ID`) REFERENCES `Document` (`ID`);
