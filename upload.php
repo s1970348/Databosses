@@ -72,7 +72,10 @@ function hideA()
 			<tr>
         <td>Weight (in grams):</td><td><input type='text' name='Weight'></td></tr>
 				<tr>
-        <td>Binding type:</td><td><input type='text' name='Binding'></td></tr>
+        <td>Binding type:</td><td><SELECT NAME="Binding">
+		<OPTION>Hard cover</OPTION>
+		<OPTION>Paperback</OPTION>
+		</SELECT></td></tr>
 				<tr>
         <td>Book location:</td><td><input type='text' name='Location'></td></tr>
 				<tr>
@@ -85,8 +88,14 @@ function hideA()
         <input type='radio' name='aorb' onclick=
         "hideC()">Upload book</td></tr>
 				<tr>
-        <td>File format:</td><td><input type='text' name='Format'></td></tr>
-      </table>
+        <td>File format:</td><td><SELECT NAME="Format">
+		<OPTION>PDF</OPTION>
+		<OPTION>Text file</OPTION>
+		<OPTION>Microsoft Word</OPTION>
+		</SELECT></td></tr>
+		</table>
+		</FORM>
+      
       <table border="0" style="display:none" id="C">
         <tr>
 				<td>URL location:</td><td><input type='text' name='LocationURL'></td></tr>
@@ -133,6 +142,11 @@ $queryexecuteElectronicOnline= mysql_query($queryElectronicOnline) or die('Addin
 
 } else {
 
+if (($_FILES["file"]["type"] == "application/msword")
+|| ($_FILES["file"]["type"] == "application/pdf")
+|| ($_FILES["file"]["type"] == "text/plain")
+&& ($_FILES["file"]["size"] < 52428800)) {
+
 if (file_exists("siegfried.let.rug.nl/s1815911/uploads/" . $_FILES["file"]["name"]))
       {
       echo $_FILES["file"]["name"] . " already exists, please change the name of the file. ";
@@ -144,6 +158,11 @@ if (file_exists("siegfried.let.rug.nl/s1815911/uploads/" . $_FILES["file"]["name
       "../uploads/" . $_FILES["file"]["name"]);
       echo "The book has been succesfully added.";
       }
+} else{
+
+  echo "Invalid file!";
+  
+ }
 
 $queryElectronicFile=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", '', '', ".$Format.", '', siegfried.let.rug.nl/s1815911/uploads/".$_FILES["file"]["name"].", ".$Rating.", electronic)";
 
