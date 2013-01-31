@@ -69,7 +69,7 @@ where Type = "electronic" and Email = "'.$_SESSION['e-mail'].'"
     
     echo("<br />
 
-<input type='submit' onClick=\"window.open('test.php','mywindow','width=400,height=200,toolbar=no,location=no,directories=no,statu s=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no')\" value='add book to library'/>
+<input type='submit' onClick=\"window.open('upload.php','mywindow','width=400,height=200,toolbar=no,location=no,directories=no,statu s=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no')\" value='add book to library'/>
 
 
 <br /><input TYPE=\"radio\"NAME=\"e-libbut\"ID=\"e-libbut\"ONCLICK=\"visibility('e-lib')\"/> 
