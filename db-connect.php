@@ -1,5 +1,8 @@
 <?php
-require_once('logincredentials.php');
+$host='localhost';
+$user='root';
+$password='';
+$databasename='s1970348';
 
 $con = mysql_connect($host, $user, $password);
 if (!$con)
@@ -12,6 +15,7 @@ if (!$db_selected)
 {
 				die('Connection to the database succeeded, however couldnt find:'.$databasename .' error returned: ' . mysql_error());
 }
+
 /**
  * @author Jesse Veentjer
  * @copyright 2012
