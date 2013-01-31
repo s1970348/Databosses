@@ -32,6 +32,13 @@ $_SESSION['login_time']=$_SERVER["REQUEST_TIME"]+(60*60);
           <?
 					echo( $_SESSION['e-mail'] .'<br>' . $_SESSION['password']);
 					?>
+					<h1>Welcome to Personal Library Space.</h1>
+					<p>Personal Library Space is an online library where you can not only borrow
+					books, but also share them with your friends. Upload your books
+					and work on your personal online library. There is also a public library
+					where all the public books can be borrowed. </p>
+					<p>We also have the option to upload and view e-books online. So register now
+					and enjoy the benefits of our online library service.</p>
         </div>
         <div class="login">
           <?php include("login.php"); ?>
