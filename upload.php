@@ -46,7 +46,7 @@ function hideA()
     <?php
     require_once('dbconnect.php');
     ?>
-    <form method='post' enctype="multipart/form-data">
+    <form method = 'post' action=". $_SERVER['PHP_SELF'] ." enctype="multipart/form-data">
 		<h1>Add a book</h1>
 		<table border="0">
 		<tr>
@@ -111,18 +111,72 @@ function hideA()
     </form>
 <?php
 
+	if (preg_match('~"<>{}"~', $_POST["ISBN"]))
+	{
+		echo "The ISBN number is not correct.";
+	}
+	else{
 $ISBN = $_POST['ISBN'];
+}
+	if (preg_match('~"<>{}"~,', $_POST["Title"]))
+	{
+		echo "The title contains illegal characters.";
+	}
+	else{
 $Title = $_POST['Title'];
+}
+	if (preg_match('~"<>{}"~,0123456789', $_POST["Author"]))
+	{
+		echo "The name of the author contains illegal characters";
+	}
+	else{
 $Author = $_POST['Author'];
+}
+	if (preg_match('~"<>{}"~,ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', $_POST["Year"]))
+	{
+		echo "The year is incorrect";
+	}
+	else{
 $Year = $_POST['Year'];
+}
+	if (preg_match('~"<>{}"~,ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', $_POST["Pages"]))
+	{
+		echo "The amound of pages entered is incorrect.";
+	}
+	else{
 $Pages = $_POST['Pages'];
+}
+	if (preg_match('~"<>{}"~,ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', $_POST["Rating"]))
+	{
+		echo "The rating entered contains illegal characters.";
+	}
+	else{
 $Rating = $_POST['Rating'];
+}
 
 if(isset($_POST['Weight'])) {
 
+	if (preg_match('~"<>{}"~,ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', $_POST["Weight"]))
+	{
+		echo "The book weight contains illegal characters.";
+	}
+	else{
 $Weight = $_POST['Weight'];
+}
+	if (preg_match('~"<>{}"~', $_POST["Binding"]))
+	{
+		echo "The binding entered contains illegal characters.";
+	}
+	else{
 $Binding = $_POST['Binding'];
+}
+	if (preg_match('~"<>{}"~,', $_POST["Location"]))
+	{
+		echo "The location entered contains invalid characters.";
+	}
+	else{
 $Location = $_POST['Location'];
+}
 
 $queryPaper=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", ".$Weight.", ".$Binding.",'', ".$Location.", '', ".$Rating.", paper)";
 
@@ -130,11 +184,23 @@ $queryexecutePaper= mysql_query($queryPaper) or die('Adding the book to the data
 
 } else {
 
+	if (preg_match('~"<>{}"~,', $_POST["Format"]))
+	{
+		echo "The file format entered contains illegal characters.";
+	}
+	else{
 $Format = $_POST['Format'];
+}
 
 if(isset($_POST['LocationURL'])) {
 
+	if (preg_match('~"<>{}"~,', $_POST["LocationURL"]))
+	{
+		echo "The location of the URL entered contains illegal characters.";
+	}
+	else{
 $LocationURL = $_POST['LocationURL'];
+}
 
 $queryElectronicOnline=("INSERT INTO Document values('',".$ISBN.", ".$Title.", ".$Author.", ".$Year.", ".$Pages.", '', '', ".$Format.", '', ".$LocationURL.", ".$Rating.", electronic)";
 
@@ -147,9 +213,9 @@ if (($_FILES["file"]["type"] == "application/msword")
 || ($_FILES["file"]["type"] == "text/plain")
 && ($_FILES["file"]["size"] < 52428800)) {
 
-if (preg_match('~"<>{}"~iU', $_FILES["file"]["name"]))
+if (preg_match('~"<>{}"~', $_FILES["file"]["name"]))
 	{
-		echo "Het bestand bevat illegale tekens. Ga <a href=\"abstractsuploaden.php\">terug</a> naar de uploadpagina.";
+		echo "The file contains illegal characters.";
 
 } else {
 
