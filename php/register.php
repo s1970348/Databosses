@@ -32,24 +32,19 @@ $_SESSION['login_time']=$_SERVER["REQUEST_TIME"]+(60*60);
           <form action="insert.php" enctype=
           "multipart/form-data" method="post">
             First Name:<br>
-            <br>
             <input type="text" name="Fname"><br>
             <br>
             Last Name:<br>
-            <br>
             <input type="text" name="Lname"><br>
             <br>
             Do you want your books to be visible for other users? yes/no<br>
-            <br>
             <input type="text" name="Visibility"><br>
             <br>
             E-mail:<br>
-            <br>
             <input type="text" name="Email"><br>
             <br>
             Choose a password:<br>
-            <br>
-            <input type="text" name="Password"><br>
+            <input type='password' name="Password"><br>
             <br>
             
             <br>
