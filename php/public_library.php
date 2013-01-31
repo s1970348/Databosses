@@ -37,21 +37,22 @@ $result = mysql_query($sql)or die(mysql_error());
 
 echo "<table id='results'>";
 while($row = mysql_fetch_array($result)){ 
-$ISBN     = $row['ISBN'];
-	$Title    = $row['Title'];  	
-  $Author = $row['Author'];	
-	$Year = $row['Year'];
-	$Pages = $row['Pages'];
-	$Weight = $row['Weight'];
-	$Binding = $row['Binding'];
-	$Format = $row['Format'];
-	$Location = $row['Location'];
-	$LocationURL = $row['LocationURL'];
-	$Rating = $row['Rating'];
-	$Type = $row['Type'];
-						
-					echo "<tr><td><b>ISBN:</b> $ISBN</td></tr><tr><td><b>Title:</b> $Title</td></tr><tr><td><b>Author:</b> $Author</td></tr><tr><td><b>Year:</b> $Year</td></tr><tr><td><b>Pages:</b> $Pages</td></tr><tr><td><b>Weight:</b> $Weight</td></tr><tr><td><b>Binding:</b> $Binding</td></tr><tr><td><b>Format:</b> $Format</td></tr><tr><td><b>Location:</b> $Location</td></tr><tr><td><a href=".$LocationURL.">Link to location</a></td></tr><tr><td><b>Rating:</b> $Rating</td></tr><tr><td><b>Type:</b> $Type</td></tr>";
-					
+echo ('<b>ISBN:</b> '. $row['ISBN'] . '<br>'); 
+echo ('<b>Title:</b> '. $row['Title'] . '<br>'); 
+echo ('<b>Author:</b> '. $row['Author'] . '<br>'); 
+echo ('<b>Year:</b> '. $row['Year'] . '<br>'); 
+echo ('<b>Pages:</b> '. $row['Pages'] . '<br>'); 
+echo ('<b>Weight:</b> '. $row['Weight'] . '<br>'); 
+echo ('<b>Binding:</b> '. $row['Binding'] . '<br>'); 
+echo ('<b>Format:</b> '. $row['Format'] . '<br>');
+echo ('<b>Location:</b> '. $row['Location'] . '<br>');
+echo ('<b><a href='.$row['LocationURL'].'>Link to location</a></b><br>');
+echo ('<b>Rating:</b> '. $row['Rating'] . '<br>');
+echo ('<b>Type:</b> '. $row['Type'] . '<br>');
+echo ('<br>');
+echo ('<hr>');
+
+	
 								 }								 
 echo "</table>";	
 					
