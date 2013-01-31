@@ -40,7 +40,7 @@ echo "<font size='-1'>(<a href='login.php'>Or click here if you don't want to wa
     
     if ($visiqueryresult_row['Visibility'] != $_POST['yesnopublic']) {
         #update db 
-        echo('Library visibility has been updated!');
+        echo('<br /><br /> Library visibility has been updated!');
         $updatevisionquery ="UPDATE `user` SET `Visibility` = '".$_POST['yesnopublic']."' WHERE `Email` = '".$_SESSION['e-mail']."'";
         mysql_query($updatevisionquery) or die ('Updating visibility failed ' . mysql_error());
         
@@ -48,7 +48,7 @@ echo "<font size='-1'>(<a href='login.php'>Or click here if you don't want to wa
     }
 
 
-$libraryquery = ('SELECT distinct ISBN,Title,Author,Year,Pages,weight,binding,location,rating,Type,Email
+$libraryquery = ('SELECT distinct ISBN,Title,Author,Year,Pages,weight,binding,location,rating,Type,Email ,Book_ID, U_ID
 from Document
 inner join Ownership
 on ID=Book_ID
@@ -57,7 +57,7 @@ on Owner_ID=U_ID
 where Type = "paper" and Email = "'.$_SESSION['e-mail'].'"
 ');
     $libraryresult = mysql_query($libraryquery) or die ('Requesting library failed' . mysql_error());
-    $elibraryquery = ('SELECT distinct ISBN,Title,Author,Year,Pages,format,locationURL,rating,Type,Email
+    $elibraryquery = ('SELECT distinct ISBN,Title,Author,Year,Pages,format,locationURL,rating,Type,Email ,Book_ID, U_ID
 from Document
 inner join Ownership
 on ID=Book_ID
@@ -79,7 +79,7 @@ Id like to view my library
 <!--  Library view
 --!>
 <table id='library' border='1'>
-<tr><th> ISBN </th> <th> Title </th> <th> Author </th> <th> Pages </th> <th> Year </th> <th> weight </th> <th> binding </th> <th> rating </th> </tr>
+<tr><th> ISBN </th> <th> Title </th> <th> Author </th> <th> Pages </th> <th> Year </th> <th> weight </th> <th> binding </th> <th> rating </th> <th> Remove </th> </tr>
 
 ");
 while ($row = mysql_fetch_array($libraryresult)) {
@@ -92,6 +92,8 @@ while ($row = mysql_fetch_array($libraryresult)) {
             echo ('<td>' . $row['weight'] . '</td>');
             echo ('<td>' . $row['binding'] . '</td>');
             echo ('<td>' . $row['rating'] . '</td>');
+            //removebuttan
+            echo("<td> <input type='submit' onClick=\"window.open('delete.php?userid=".$row['U_ID']."&bookid=".$row['Book_ID']." ','mywindow','width=400,height=200,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no')\" value=' X '/> </td>");
             echo ('</tr>');
         }
 echo("
@@ -112,7 +114,7 @@ Id like to view my e-library
 <legend> View my e-library</legend>
 
 <table id='elibrary' border='1'>
-<tr><th> ISBN </th> <th> Title </th> <th> Author </th> <th> Pages </th> <th> Year </th> <th> View </th> <th> rating </th> </tr>
+<tr><th> ISBN </th> <th> Title </th> <th> Author </th> <th> Pages </th> <th> Year </th> <th> View </th> <th> Rating </th> <th> Remove </th> </tr>
 
 ");
 while ($row1 = mysql_fetch_array($elibraryresult)) {
@@ -124,6 +126,7 @@ while ($row1 = mysql_fetch_array($elibraryresult)) {
             echo ('<td>' . $row1['Year'] . '</td>');
             echo ('<td> <a href="' . $row1['locationURL'] . '" target =\'_blank\'> View book </a> </td>');
             echo ('<td>' . $row1['rating'] . '</td>');
+            echo("<td> <input type='submit' onClick=\"window.open('delete.php?userid=".$row1['U_ID']."&bookid=".$row1['Book_ID']." ','mywindow','width=400,height=200,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no')\" value=' X '/> </td>");
             echo ('</tr>');
         }
 echo("
