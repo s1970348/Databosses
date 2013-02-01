@@ -26,7 +26,7 @@
                                                   } else {
                                                   die("E-mail or password was incorrect or not found! Please try again! <br /> Error returned: " . mysql_error());
                                                   }}else{ 
-                                                    if (isset($_SESSION['e-mail'])){
+                                                    if (!isset($_SESSION['e-mail'])){
                                                   // if no currentsession data can be found then print form to query user for login data
                                                       echo("
                                                   <form method = 'post' action=". $_SERVER['PHP_SELF'] .">

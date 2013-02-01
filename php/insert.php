@@ -1,3 +1,4 @@
+<body onLoad="setTimeout('delayer()', 3000)">
 <?
 require_once('db-connect.php');
 
@@ -18,7 +19,14 @@ if (!mysql_query($query))
                            die("<p id='error'>Please go back and try again.</p>");
                          }
 												 
-echo("<p id='center'>Registration Successful!</p>"); 
+echo("<p id='center'>Registration Successful! Redirecting..</p>"); 
 
 mysql_close();
 ?>
+
+<script type="text/javascript">
+<!--
+function delayer(){
+    window.location = "index.php"
+}
+</script>
