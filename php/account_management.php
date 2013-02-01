@@ -18,12 +18,11 @@ require_once ('db-connect.php');
 if (!isset($_SESSION['e-mail']) or !isset($_SESSION['password'])) {
     echo ('You need to login first, redirecting to the login page..');
     echo "<BR />";
-    echo "<font size='-1'>(<a href='login.php'>Or click here if you don't want to wait!</a>)</font>";
+    echo "<font size='-1'>(<a href='index.php'>Or click here if you don't want to wait!</a>)</font>";
     //echo "<meta http-equiv=\"refresh\" content=\"3;index.php\">";
 } else {
     echo ('Welcome,' . $_SESSION['e-mail'] . '.<br /> you logged in at ' . date('H:i:s d-m-Y',
         $_SESSION['login_time']));
-
     $visiquery = 'SELECT `Visibility` FROM `user` WHERE Email = "' . $_SESSION['e-mail'] .
         '"';
     $visiqueryresult = mysql_query($visiquery) or die('Requesting visible query failed' .
