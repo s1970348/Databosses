@@ -22,7 +22,6 @@
                                                   //store entered (correct) )email and password in session
                                                   $_SESSION['e-mail']=$requested_email;
                                                   $_SESSION['password']=$requested_password;
-                                                  mysql_close($host, $user, $password);
                                                   exit();
                                                   } else {
                                                   die("E-mail or password was incorrect or not found! Please try again! <br /> Error returned: " . mysql_error());

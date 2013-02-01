@@ -1,8 +1,8 @@
 <?	  
 $dbhost = 'localhost';
-$username="s1982419";
-$password="Zu0ahH2e";
-$database="s1982419";
+$username="root";
+$password="";
+$database="s1970348";
 
 $link = mysql_connect($dbhost,$username,$password);
 if (!$link) {
