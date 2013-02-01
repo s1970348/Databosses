@@ -173,6 +173,10 @@ if (empty($_POST['submit'])) {
 
         $queryexecutePaper = mysql_query($queryPaper) or die('Adding the book to the database failed :' .
             mysql_error());
+		
+		$Book_ID = mysql_query("select ID from Document where ISBN ='".$ISBN."' and Title ='".$Title."'")
+		$Owner_ID = mysql_query("select U_ID from User where Email = '".$_SESSION['e-mail']."'")
+		$addOwnership = mysql_query("insert into Ownership values('".$Owner_ID."', '".$Book_ID."','no',''")
 
     } else {
 
@@ -194,6 +198,10 @@ if (empty($_POST['submit'])) {
 
             $queryexecuteElectronicOnline = mysql_query($queryElectronicOnline) or die('Adding the e-book to the database failed :' .
                 mysql_error());
+			
+		$Book_ID = mysql_query("select ID from Document where ISBN ='".$ISBN."' and Title ='".$Title."'")
+		$Owner_ID = mysql_query("select U_ID from User where Email = '".$_SESSION['e-mail']."'")
+		$addOwnership = mysql_query("insert into Ownership values('".$Owner_ID."', '".$Book_ID."','no',''")
 
         } else {
 
@@ -229,6 +237,10 @@ if (empty($_POST['submit'])) {
 
         $queryexecuteElectronicFile = mysql_query($queryElectronicFile) or die('Adding the book to the database failed: ' .
             mysql_error());
+			
+		$Book_ID = mysql_query("select ID from Document where ISBN ='".$ISBN."' and Title ='".$Title."'")
+		$Owner_ID = mysql_query("select U_ID from User where Email = '".$_SESSION['e-mail']."'")
+		$addOwnership = mysql_query("insert into Ownership values('".$Owner_ID."', '".$Book_ID."','no',''")
 
         echo ('
         <script>
