@@ -18,7 +18,7 @@
                                                   echo "You have been successfully logged in! Please wait and you will be redirected!";
                                                   echo "<BR />";
                                                   echo "<font size='-1'>(<a href='".$_POST['referer']."'>Or click here if you don't want to wait!</a>)</font>";
-                                                  echo "<meta http-equiv=\"refresh\" content=\"3;account_management.php\">";
+                                                  echo "<meta http-equiv=\"refresh\" content=\"3;index.php\">";
                                                   //store entered (correct) )email and password in session
                                                   $_SESSION['e-mail']=$requested_email;
                                                   $_SESSION['password']=$requested_password;

@@ -1,8 +1,4 @@
 
-<?php
-// access session
-session_start();
-?>
 <!Doctype html>
 <html lang="en">
 <head>
