@@ -174,9 +174,12 @@ if (empty($_POST['submit'])) {
         $queryexecutePaper = mysql_query($queryPaper) or die('Adding the book to the database failed :' .
             mysql_error());
 		
-		$Book_ID = mysql_query("select ID from Document where ISBN ='".$ISBN."' and Title ='".$Title."'")
-		$Owner_ID = mysql_query("select U_ID from User where Email = '".$_SESSION['e-mail']."'")
-		$addOwnership = mysql_query("insert into Ownership values('".$Owner_ID."', '".$Book_ID."','no',''")
+		$Book_ID = mysql_query("select ID from Document where ISBN ='".$ISBN."' and Title ='".$Title."'") or die('Searching the Book ID failed: ' .
+            mysql_error());
+		$Owner_ID = mysql_query("select U_ID from User where Email = '".$_SESSION['e-mail']."'") or die('Searching the Book ID failed: ' .
+            mysql_error());
+		$addOwnership = mysql_query("insert into Ownership values('".$Owner_ID."', '".$Book_ID."','no',''") or die('Adding the book and owner to Ownership: ' .
+            mysql_error());
 
     } else {
 
@@ -199,9 +202,12 @@ if (empty($_POST['submit'])) {
             $queryexecuteElectronicOnline = mysql_query($queryElectronicOnline) or die('Adding the e-book to the database failed :' .
                 mysql_error());
 			
-		$Book_ID = mysql_query("select ID from Document where ISBN ='".$ISBN."' and Title ='".$Title."'")
-		$Owner_ID = mysql_query("select U_ID from User where Email = '".$_SESSION['e-mail']."'")
-		$addOwnership = mysql_query("insert into Ownership values('".$Owner_ID."', '".$Book_ID."','no',''")
+		$Book_ID = mysql_query("select ID from Document where ISBN ='".$ISBN."' and Title ='".$Title."'") or die('Searching the Book ID failed: ' .
+            mysql_error());
+		$Owner_ID = mysql_query("select U_ID from User where Email = '".$_SESSION['e-mail']."'") or die('Searching the Book ID failed: ' .
+            mysql_error());
+		$addOwnership = mysql_query("insert into Ownership values('".$Owner_ID."', '".$Book_ID."','no',''") or die('Adding the book and owner to Ownership: ' .
+            mysql_error());
 
         } else {
 
