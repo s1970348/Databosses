@@ -251,13 +251,13 @@ if (empty($_POST['submit'])) {
 		$addOwnership = mysql_query("insert into Ownership values('".$Owner_ID."', '".$Book_ID."','no',''") or die('Adding the book and owner to Ownership: ' .
             mysql_error());
 
-        echo ('
+            }
+echo ('
         <script>
         window.opener.location.reload();
         window.close()
         </script>
         ');
-    }
 }
 
 ?>
