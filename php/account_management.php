@@ -1,9 +1,11 @@
-
+<?
+session_start();
+?>
 <!Doctype html>
 <html lang="en">
 <head>
 <?
-require_once ('meta.php ');
+require_once ('meta.php');
 ?>
 <script TYPE="text/javascript" SRC="fieldhider.js"></script>
 <link rel="stylesheet" href="css.css" type="text/css" media="screen"/>
