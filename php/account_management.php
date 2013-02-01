@@ -7,11 +7,25 @@ session_start();
 <?
 require_once ('meta.php');
 ?>
+<!--[if !IE]><!-->
+    <link rel="stylesheet" type="text/css" href=
+    "../css/bookstyle2.css"><!--<![endif]-->
+    <!--[if IE]>
+  <link rel="stylesheet" type="text/css" href="../css/bookstyle.css" />
+<![endif]-->
 <script TYPE="text/javascript" SRC="fieldhider.js"></script>
-<link rel="stylesheet" href="css.css" type="text/css" media="screen"/>
 <title>Manage your settings</title>
 </head>
-<body>
+<body class="normal">
+<div class="container">
+      <div class="banner"></div>
+      <?php include("menu.php"); ?>
+			<?if (isset ( $_SESSION['e-mail']) or isset($_SESSION['password'])) {
+				echo(' <tr><td><a href="account_management.php">Account</a></td></tr> ');
+				}?>
+			</table>
+			<div class="textwrapper">
+        <div class="text">
 <?
 // be sure to have entered your own password and database name in logincredentials.php
 
@@ -25,7 +39,7 @@ if (!isset($_SESSION['e-mail']) or !isset($_SESSION['password'])) {
 } else {
     echo ('Welcome,' . $_SESSION['e-mail'] . '.<br /> you logged in at ' . date('H:i:s d-m-Y',
         $_SESSION['login_time']));
-    $visiquery = 'SELECT `Visibility` FROM `user` WHERE Email = "' . $_SESSION['e-mail'] .
+    $visiquery = 'SELECT `Visibility` FROM `User` WHERE Email = "' . $_SESSION['e-mail'] .
         '"';
     $visiqueryresult = mysql_query($visiquery) or die('Requesting visible query failed' .
         mysql_error());
@@ -37,7 +51,7 @@ if (!isset($_SESSION['e-mail']) or !isset($_SESSION['password'])) {
         if ($visiqueryresult_row['Visibility'] != $_POST['yesnopublic']) {
             #update db
             echo ('<br /><br /> Library visibility has been updated!');
-            $updatevisionquery = "UPDATE `user` SET `Visibility` = '" . $_POST['yesnopublic'] .
+            $updatevisionquery = "UPDATE `User` SET `Visibility` = '" . $_POST['yesnopublic'] .
                 "' WHERE `Email` = '" . $_SESSION['e-mail'] . "'";
             mysql_query($updatevisionquery) or die('Updating visibility failed ' .
                 mysql_error());
@@ -76,8 +90,6 @@ where Type = "electronic" and Email = "' . $_SESSION['e-mail'] . '"
 Id like to view my library
 <fieldset NAME='e-lib' ID='e-lib' style=\"display:none\">
 <legend>View my library</legend>
-<!--  Library view
---!>
 <table id='library' border='1'>
 <tr><th> ISBN </th> <th> Title </th> <th> Author </th> <th> Pages </th> <th> Year </th> <th> weight </th> <th> binding </th> <th> rating </th> <th> Remove </th> </tr>
 
@@ -188,4 +200,28 @@ ONCLICK=\"visibility('publicfield')\"
 }
 ?>
 
-</body>
+</div>
+        <div class="login">
+          <?php include("login.php"); ?>
+          </div>
+        <div class="shoutbox">
+          <h3>
+            Shoutbox
+          </h3><?php include("shoutmini.txt"); ?>
+        </div>
+        <div class="news">
+          <h3>
+            News
+          </h3>This is the box where newsitems will be displayed
+          when the site is done.
+        </div>
+        <div class="footer">
+          <br>
+          <p>
+            <a href="#">Sitemap</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
